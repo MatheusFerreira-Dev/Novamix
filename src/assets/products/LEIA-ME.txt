@@ -1,0 +1,1 @@
+﻿Coloque aqui as fotos reais dos produtos BONIX (png/jpg/webp), com estes nomes: oleos, lubrificantes, filtros, acessorios. Ex: oleos.png. Elas aparecem automaticamente no carrossel.

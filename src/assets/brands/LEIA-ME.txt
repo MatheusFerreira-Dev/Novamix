@@ -1,0 +1,1 @@
+Opcional: coloque aqui o logotipo de cada marca (svg/png/webp) com o nome do slug, ex.: volkswagen.svg, mercedes-benz.svg, caoa-chery.png. Enquanto nao houver arquivo, o site mostra o nome da marca em texto. Use apenas arquivos oficiais/autorizados.

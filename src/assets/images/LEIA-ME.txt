@@ -1,0 +1,1 @@
+﻿Opcional: coloque aqui hero.jpg (foto de fundo do topo) e about.jpg (foto da loja/oficina). Aparecem automaticamente.
