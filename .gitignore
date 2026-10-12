@@ -30,3 +30,6 @@ dist-ssr
 
 # Fotos/vídeo de origem (backup local, não vão para o repositório)
 _originais/
+
+.vercel
+.env*
