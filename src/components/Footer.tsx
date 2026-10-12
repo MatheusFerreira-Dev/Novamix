@@ -18,7 +18,7 @@ export default function Footer() {
         <div>
           <img src={logo} alt={`${business.name} ${business.tagline}`} width={830} height={210} className="h-14 w-auto" loading="lazy" decoding="async" />
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/55">
-            Troca de óleo, filtros, lubrificantes e acessórios automotivos para manter seu veículo sempre em boas condições.
+            Troca de óleo em Jarinu - SP, com filtros, lubrificantes e acessórios automotivos para manter seu veículo sempre em boas condições.
           </p>
         </div>
 

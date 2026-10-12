@@ -85,7 +85,7 @@ export default function BookingSection() {
       <div className="pointer-events-none absolute -right-40 top-0 size-[40rem] rounded-full bg-accent/10 blur-[120px]" aria-hidden="true" />
       <div className="relative mx-auto grid max-w-7xl gap-10 px-5 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
         <Reveal>
-          <Eyebrow>Agendamento</Eyebrow>
+          <Eyebrow>Agende sua troca de óleo em Jarinu</Eyebrow>
           <h2 className="display text-[clamp(2.1rem,4.8vw,3.75rem)]">
             Seu horário.
             <br />

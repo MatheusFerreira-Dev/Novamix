@@ -38,7 +38,7 @@ export default function OilFinder() {
     <section id="oleo-ideal" className="bg-graphite py-10 sm:py-12">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <Reveal>
-          <Eyebrow>Qual óleo usar?</Eyebrow>
+          <Eyebrow>Troca de óleo em Jarinu - SP</Eyebrow>
           <h2 className="display text-[clamp(1.6rem,3.2vw,2.5rem)]">Quando devo trocar o óleo?</h2>
         </Reveal>
 

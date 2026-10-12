@@ -105,7 +105,7 @@ export default function ProductsCarousel() {
             <Eyebrow>Produtos e acessórios</Eyebrow>
             <h2 className="display text-[clamp(1.9rem,3.8vw,3rem)]">Produtos para cuidar do seu carro.</h2>
             <p className="mt-3 text-base text-white/75">
-              Do óleo aos pequenos detalhes. Cuide do seu carro por completo.
+              Óleos, filtros e acessórios automotivos em Jarinu: do óleo aos pequenos detalhes, cuide do seu carro por completo.
             </p>
           </div>
           <div className="shrink-0">
