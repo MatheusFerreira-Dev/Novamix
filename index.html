@@ -37,8 +37,10 @@
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- imagem do Hero (poster do vídeo): baixada com prioridade alta -->
-    <link rel="preload" as="image" href="/video-fachada-poster.jpg" fetchpriority="high" />
+    <!-- logo da abertura: é o primeiro conteúdo da página, então tem prioridade máxima -->
+    <link rel="preload" as="image" href="/logo-830.webp" type="image/webp" fetchpriority="high" />
+    <!-- poster do vídeo do Hero: só aparece depois da abertura, então não disputa banda com a logo -->
+    <link rel="preload" as="image" href="/video-fachada-poster.jpg" fetchpriority="low" />
 
     <!-- Fontes: o CSS carrega sem bloquear a primeira renderização -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -60,7 +62,12 @@
     <script type="application/ld+json">__JSON_LD__</script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Abertura estática (idêntica ao componente Splash): aparece antes do JavaScript e é substituída sem piscar -->
+      <div style="position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:#000" aria-hidden="true">
+        <img src="/logo-830.webp" alt="" width="830" height="210" style="width:min(78vw,26rem);height:auto" fetchpriority="high" />
+      </div>
+    </div>
     <noscript>
       <h1>Troca de óleo em Jarinu - SP | Novamix Center</h1>
       <p>
