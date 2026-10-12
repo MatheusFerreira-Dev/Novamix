@@ -58,15 +58,40 @@
       />
     </noscript>
 
+    <noscript><style>#splash{display:none}</style></noscript>
+
     <!-- Dados estruturados (gerados no build a partir de src/config e src/data) -->
     <script type="application/ld+json">__JSON_LD__</script>
   </head>
   <body>
-    <div id="root">
-      <!-- Abertura estática (idêntica ao componente Splash): aparece antes do JavaScript e é substituída sem piscar -->
-      <div style="position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:#000" aria-hidden="true">
-        <img src="/logo-830.webp" alt="" width="830" height="210" style="width:min(78vw,26rem);height:auto" fetchpriority="high" />
-      </div>
+    <!-- Abertura (preto → logo → fade → site). Fica fora do #root: o React nunca a recria, então não piscam LCP/FCP. -->
+    <div id="splash" style="position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:#000" aria-hidden="true">
+      <img id="splash-logo" src="/logo-830.webp" alt="" width="830" height="210" style="width:min(78vw,26rem);height:auto" fetchpriority="high" />
+    </div>
+    <script>
+      (function () {
+        var el = document.getElementById("splash"), img = document.getElementById("splash-logo");
+        if (!el) return;
+        var done = false;
+        function finish() {
+          window.__splashDone = true;
+          window.dispatchEvent(new Event("splash:done"));
+        }
+        function hide() {
+          if (done) return;
+          done = true;
+          el.style.transition = "opacity .5s ease-in-out";
+          el.style.opacity = "0";
+          setTimeout(function () { el.remove(); finish(); }, 500);
+        }
+        var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        function start() { setTimeout(hide, reduced ? 250 : 900); }
+        // o tempo de exibição conta a partir do momento em que a logo aparece
+        if (img.complete) start(); else img.addEventListener("load", start, { once: true });
+        setTimeout(hide, 4000); // segurança: nunca prende a tela
+      })();
+    </script>
+    <div id="root"></div>
     </div>
     <noscript>
       <h1>Troca de óleo em Jarinu - SP | Novamix Center</h1>

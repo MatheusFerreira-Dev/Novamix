@@ -8,7 +8,6 @@ import Header from './components/Header'
 import Hero from './components/Hero'
 import OilFinder from './components/OilFinder'
 import ProductsCarousel from './components/ProductsCarousel'
-import Splash from './components/Splash'
 import WhatsAppButton from './components/WhatsAppButton'
 
 // Ordem das seções: Hero → Produtos → Quando trocar o óleo → Agendamento → Sobre → Dúvidas
@@ -22,7 +21,6 @@ export default function App() {
       >
         Pular para o conteúdo
       </a>
-      <Splash />
       <DirectionsProvider>
         <Header />
         <main id="conteudo">
