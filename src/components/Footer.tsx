@@ -1,3 +1,4 @@
+import logo from '../assets/logo-830.webp'
 import { business } from '../config/business'
 import { waGreeting } from '../lib/whatsapp'
 import { InstagramIcon, WhatsAppIcon } from './ui'
@@ -15,7 +16,7 @@ export default function Footer() {
     <footer className="border-t-2 border-accent bg-ink">
       <div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 sm:px-8 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
-          <img src="/logo-830.webp" alt={`${business.name} ${business.tagline}`} width={830} height={210} className="h-14 w-auto" loading="lazy" decoding="async" />
+          <img src={logo} alt={`${business.name} ${business.tagline}`} width={830} height={210} className="h-14 w-auto" loading="lazy" decoding="async" />
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/55">
             Troca de óleo, filtros, lubrificantes e acessórios automotivos para manter seu veículo sempre em boas condições.
           </p>
