@@ -37,8 +37,9 @@
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- imagem do Hero (poster do vídeo): baixada com prioridade alta -->
-    <link rel="preload" as="image" href="/video-fachada-poster.jpg" fetchpriority="high" />
+    <!-- imagem do Hero: último frame no celular, poster do vídeo no desktop -->
+    <link rel="preload" as="image" href="/video-fachada-ultimo-frame.jpg" media="(max-width: 767px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="/video-fachada-poster.jpg" media="(min-width: 768px)" fetchpriority="high" />
 
     <!-- Fontes: o CSS carrega sem bloquear a primeira renderização -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

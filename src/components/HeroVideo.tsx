@@ -5,6 +5,9 @@ import { splashDone } from '../lib/splash'
 // reproduzido em velocidade normal (1x), uma única vez. O arquivo completo fica em _originais/.
 const SRC = '/video-fachada.mp4'
 const POSTER = '/video-fachada-poster.jpg'
+// celular: só o último frame (imagem estática), sem baixar o vídeo
+const LAST_FRAME = '/video-fachada-ultimo-frame.jpg'
+const MOBILE_QUERY = '(max-width: 767px)'
 const START = 0
 const END = 3
 const RATE = 1
@@ -15,7 +18,7 @@ const RATE = 1
  * Começa depois da abertura com a logo. Com "reduzir movimento" ou economia de dados,
  * mostra apenas o último frame, parado.
  */
-export default function HeroVideo() {
+function HeroMotion() {
   const ref = useRef<HTMLVideoElement>(null)
   const [ready, setReady] = useState(true) // o poster já aparece no mesmo instante
 
@@ -128,4 +131,30 @@ export default function HeroVideo() {
       />
     </div>
   )
+}
+
+/** Celular: apenas o último frame do vídeo, como imagem. Nada de vídeo, nada de decodificação, bem mais leve. */
+function HeroStill() {
+  return (
+    <div
+      className="absolute inset-y-0 right-0 -z-20 w-full bg-ink"
+      role="img"
+      aria-label="Fachada da loja Novamix Center em Jarinu"
+    >
+      <img
+        src={LAST_FRAME}
+        alt=""
+        width={478}
+        height={850}
+        fetchPriority="high"
+        decoding="async"
+        className="h-full w-full object-cover object-[50%_40%]"
+      />
+    </div>
+  )
+}
+
+export default function HeroVideo() {
+  const [mobile] = useState(() => typeof window !== 'undefined' && window.matchMedia(MOBILE_QUERY).matches)
+  return mobile ? <HeroStill /> : <HeroMotion />
 }
