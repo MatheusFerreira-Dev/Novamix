@@ -6,13 +6,15 @@ import Faq from './components/Faq'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import Hero from './components/Hero'
+import LocalArea from './components/LocalArea'
 import OilFinder from './components/OilFinder'
 import ProductsCarousel from './components/ProductsCarousel'
+import Services from './components/Services'
 import Splash from './components/Splash'
 import WhatsAppButton from './components/WhatsAppButton'
 
-// Ordem das seções: Hero → Produtos → Quando trocar o óleo → Agendamento → Sobre → Dúvidas
-// (Services, TrustSection e Location continuam em src/components, fora da página, para reativar se quiser)
+// Ordem das seções: Hero → Produtos → Serviços → Quando trocar o óleo → Agendamento → Sobre → Como funciona / cidades → Dúvidas
+// (TrustSection e Location continuam em src/components, fora da página, para reativar se quiser)
 export default function App() {
   return (
     <MotionConfig reducedMotion="user">
@@ -28,9 +30,11 @@ export default function App() {
         <main id="conteudo">
           <Hero />
           <ProductsCarousel />
+          <Services />
           <OilFinder />
           <BookingSection />
           <About />
+          <LocalArea />
           <Faq />
         </main>
         <Footer />

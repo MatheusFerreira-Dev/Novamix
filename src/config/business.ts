@@ -20,6 +20,19 @@ export const business = {
   // divergem no sábado: 13h / 14h). Enquanto vazio, o site mostra "consulte".
   hours: [] as { label: string; value: string }[],
 
+  // Nomes pelos quais as pessoas também procuram a loja (usado no JSON-LD).
+  alternateNames: ['Nova Mix Center', 'Novamix'],
+
+  // Cidades atendidas (cada uma tem sua página em /troca-de-oleo-<cidade>/).
+  // TODO: confirmar com o cliente que estas são as cidades que a loja realmente quer divulgar.
+  serviceAreas: [
+    { name: 'Jarinu', path: '/troca-de-oleo-jarinu/' },
+    { name: 'Várzea Paulista', path: '/troca-de-oleo-varzea-paulista/' },
+    { name: 'Campo Limpo Paulista', path: '/troca-de-oleo-campo-limpo-paulista/' },
+  ],
+  // Cidades vizinhas citadas só como referência de localização (a loja não declara atendimento específico).
+  nearbyCities: ['Atibaia', 'Jundiaí'],
+
   instagramUrl: 'https://www.instagram.com/novamixcenter',
   instagramHandle: '@novamixcenter',
 

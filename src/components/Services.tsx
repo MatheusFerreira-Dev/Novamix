@@ -13,7 +13,7 @@ export default function Services() {
             Mais do que uma troca de óleo<span className="text-accent">.</span>
           </h2>
           <p className="mt-4 max-w-md text-base leading-relaxed text-neutral-600">
-            Cuidados essenciais para manter seu veículo funcionando com segurança, desempenho e eficiência.
+            Serviços de troca de óleo em Jarinu e cuidados essenciais para manter seu veículo funcionando com segurança, desempenho e eficiência.
           </p>
         </Reveal>
 

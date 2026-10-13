@@ -14,7 +14,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 4.25rem; /* altura do cabeçalho fixo */
 }
 
 body {
@@ -27,7 +27,7 @@ body {
 }
 
 section[id] {
-  scroll-margin-top: 4rem;
+  scroll-margin-top: 0;
 }
 
 .display {

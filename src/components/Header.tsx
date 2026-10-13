@@ -12,7 +12,7 @@ export const navLinks = [
   { label: 'Sobre nós', href: '#sobre' },
 ]
 
-export default function Header() {
+export default function Header({ homePrefix = '' }: { homePrefix?: string }) {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
 
@@ -42,7 +42,7 @@ export default function Header() {
       }`}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:gap-6 sm:px-8">
-        <a href="#inicio" aria-label={`${business.name} — início`} className="shrink-0">
+        <a href={`${homePrefix}#inicio`} aria-label={`${business.name} — início`} className="shrink-0">
           <img src={logo} alt={`${business.name} ${business.tagline}`} width={320} height={81} className="h-8 w-auto min-[400px]:h-9 sm:h-10" />
         </a>
 
@@ -50,7 +50,7 @@ export default function Header() {
           {navLinks.map((l) => (
             <a
               key={l.href}
-              href={l.href}
+              href={`${homePrefix}${l.href}`}
               className="text-sm font-semibold text-white/75 transition hover:text-white"
             >
               {l.label}
@@ -60,7 +60,7 @@ export default function Header() {
 
         <div className="flex items-center gap-2 sm:gap-3">
           <a
-            href="#agendar"
+            href={`${homePrefix}#agendar`}
             className="inline-flex min-h-11 items-center rounded-full bg-accent px-4 text-xs font-bold min-[400px]:px-5 uppercase tracking-wider text-ink transition hover:bg-accent-hot hover:shadow-[0_0_28px_-6px_var(--color-accent)] sm:px-6 sm:text-sm"
           >
             Agendar<span className="hidden sm:inline">&nbsp;horário</span>
@@ -96,7 +96,7 @@ export default function Header() {
                   transition={{ delay: 0.08 + i * 0.05 }}
                 >
                   <a
-                    href={l.href}
+                    href={`${homePrefix}${l.href}`}
                     onClick={() => setOpen(false)}
                     className="display block border-b border-white/10 py-4 text-3xl"
                   >

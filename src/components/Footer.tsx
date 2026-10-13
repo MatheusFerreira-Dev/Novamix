@@ -11,28 +11,52 @@ const links = [
   { label: 'Sobre nós', href: '#sobre' },
 ]
 
-export default function Footer() {
+const headingClass = 'mb-5 text-xs font-bold uppercase tracking-widest text-white/60'
+
+export default function Footer({ homePrefix = '' }: { homePrefix?: string }) {
   return (
     <footer className="border-t-2 border-accent bg-ink">
-      <div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 sm:px-8 md:grid-cols-[1.4fr_1fr_1fr]">
+      <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.1fr]">
         <div>
           <img src={logo} alt={`${business.name} ${business.tagline}`} width={830} height={210} className="h-14 w-auto" loading="lazy" decoding="async" />
-          <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/55">
+          <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/60">
             Troca de óleo em Jarinu - SP, com filtros, lubrificantes e acessórios automotivos para manter seu veículo sempre em boas condições.
           </p>
         </div>
 
         <nav aria-label="Rodapé">
-          <h2 className="mb-5 text-xs font-bold uppercase tracking-widest text-white/60">Navegação</h2>
-          <ul className="space-y-3 text-sm">
+          <h2 className={headingClass}>Navegação</h2>
+          <ul className="space-y-1 text-sm">
             {links.map((l) => (
-              <li key={l.href}><a href={l.href} className="text-white/75 hover:text-accent">{l.label}</a></li>
+              <li key={l.href}>
+                <a href={`${homePrefix}${l.href}`} className="inline-flex min-h-9 items-center text-white/75 hover:text-accent">
+                  {l.label}
+                </a>
+              </li>
+            ))}
+            <li>
+              <a href="/acessorios-automotivos/" className="inline-flex min-h-9 items-center text-white/75 hover:text-accent">
+                Acessórios automotivos
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <nav aria-label="Cidades atendidas">
+          <h2 className={headingClass}>Onde atendemos</h2>
+          <ul className="space-y-1 text-sm">
+            {business.serviceAreas.map((c) => (
+              <li key={c.path}>
+                <a href={c.path} className="inline-flex min-h-9 items-center text-white/75 hover:text-accent">
+                  Troca de óleo em {c.name}
+                </a>
+              </li>
             ))}
           </ul>
         </nav>
 
         <div>
-          <h2 className="mb-5 text-xs font-bold uppercase tracking-widest text-white/60">Contato</h2>
+          <h2 className={headingClass}>Contato</h2>
           <ul className="space-y-3 text-sm text-white/75">
             <li>
               <address className="not-italic leading-relaxed">
@@ -44,17 +68,17 @@ export default function Footer() {
               </address>
             </li>
             <li>
-              <a href={`tel:+${business.whatsappNumber}`} className="hover:text-accent">
+              <a href={`tel:+${business.whatsappNumber}`} className="inline-flex min-h-9 items-center hover:text-accent">
                 {business.phoneDisplay}
               </a>
             </li>
             <li>
-              <a href={waGreeting} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-accent">
+              <a href={waGreeting} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-9 items-center gap-2 hover:text-accent">
                 <WhatsAppIcon className="size-4" /> WhatsApp
               </a>
             </li>
             <li>
-              <a href={business.instagramUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-accent">
+              <a href={business.instagramUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-9 items-center gap-2 hover:text-accent">
                 <InstagramIcon className="size-4" /> {business.instagramHandle}
               </a>
             </li>
@@ -67,5 +91,3 @@ export default function Footer() {
     </footer>
   )
 }
-
-
