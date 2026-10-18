@@ -3,7 +3,7 @@
 export const seo = {
   title: 'Troca de Óleo em Jarinu | Filtros e Acessórios | Novamix',
   description:
-    'Troca de óleo, filtros, lubrificantes e acessórios automotivos em Jarinu - SP. Agende pelo WhatsApp na Novamix Center, perto de Atibaia e Campo Limpo Paulista.',
+    'Troca de óleo, filtros, lubrificantes e acessórios automotivos em Jarinu - SP. Agende pelo WhatsApp na Novamix Center.',
   shortName: 'Novamix Center',
   fullName: 'Novamix Center Troca de Óleo',
   /** descrição curta usada no JSON-LD */

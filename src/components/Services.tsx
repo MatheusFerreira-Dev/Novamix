@@ -1,7 +1,6 @@
-import { ArrowUpRight } from 'lucide-react'
 import { services } from '../data/services'
 import { messages, waLink } from '../lib/whatsapp'
-import { Eyebrow, Reveal } from './ui'
+import { Eyebrow, Reveal, WhatsAppIcon } from './ui'
 
 export default function Services() {
   return (
@@ -17,28 +16,30 @@ export default function Services() {
           </p>
         </Reveal>
 
+        {/* A linha em si não é um link: só o botão "Perguntar" abre o WhatsApp. */}
         <ul className="border-t border-neutral-200">
           {services.map(({ id, title, text, icon: Icon }, i) => (
             <li key={id}>
               <Reveal delay={0.04 * i}>
-                <a
-                  href={waLink(messages.service(title))}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group grid grid-cols-[auto_1fr_auto] items-center gap-4 border-b border-neutral-200 py-5 transition-colors hover:bg-neutral-50 sm:gap-6 sm:py-6"
-                >
-                  <span className="font-display text-sm font-bold text-accent-deep transition-colors">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <div className="transition-transform duration-300 group-hover:translate-x-1">
+                <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4 border-b border-neutral-200 py-5 sm:gap-6 sm:py-6">
+                  <span className="font-display text-sm font-bold text-accent-deep">{String(i + 1).padStart(2, '0')}</span>
+                  <div>
                     <h3 className="font-display text-lg font-bold sm:text-xl">{title}</h3>
                     <p className="mt-1.5 max-w-lg text-sm leading-relaxed text-neutral-600">{text}</p>
+                    <a
+                      href={waLink(messages.service(title))}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Perguntar sobre ${title} pelo WhatsApp`}
+                      className="mt-3 inline-flex min-h-11 items-center gap-2 rounded-full border border-accent-deep/50 px-4 text-xs font-bold uppercase tracking-wider text-accent-deep transition hover:border-accent hover:bg-accent hover:text-ink"
+                    >
+                      <WhatsAppIcon className="size-4" /> Perguntar
+                    </a>
                   </div>
-                  <span className="grid size-12 place-items-center rounded-full border border-neutral-200 transition-colors border-accent/40 group-hover:border-accent group-hover:bg-accent">
-                    <Icon className="size-5 group-hover:hidden" strokeWidth={1.5} aria-hidden="true" />
-                    <ArrowUpRight className="hidden size-5 text-ink group-hover:block" aria-hidden="true" />
+                  <span className="grid size-12 place-items-center rounded-full border border-accent/40" aria-hidden="true">
+                    <Icon className="size-5" strokeWidth={1.5} />
                   </span>
-                </a>
+                </div>
               </Reveal>
             </li>
           ))}
@@ -47,4 +48,3 @@ export default function Services() {
     </section>
   )
 }
-

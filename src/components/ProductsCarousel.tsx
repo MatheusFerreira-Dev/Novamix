@@ -9,7 +9,9 @@ import { Eyebrow, Reveal, WhatsAppIcon, WhatsAppNote } from './ui'
 const GAP = 16
 const AUTOPLAY_MS = 7000 // lento o bastante para ler os cards
 const AFTER_INTERACTION_MS = 5000 // pausa extra após interação manual
-const SWIPE = 50
+const SWIPE = 50 // px de arrasto para trocar de card
+const SWIPE_VELOCITY = 500 // px/s: um "peteleco" rápido também troca
+const SPRING = { type: 'spring', stiffness: 260, damping: 32 } as const
 
 const perViewFor = (w: number) => (w >= 1280 ? 4 : w >= 1024 ? 3 : w >= 640 ? 2 : 1)
 
@@ -18,10 +20,14 @@ export default function ProductsCarousel() {
   const viewport = useRef<HTMLDivElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
   const x = useMotionValue(0)
+  const fade = useMotionValue(1) // usado só na volta do último para o primeiro card
   const [width, setWidth] = useState(0)
   const [viewportW, setViewportW] = useState(0)
   const [index, setIndex] = useState(0)
+  const indexRef = useRef(0)
   const elapsed = useRef(0)
+  const dragged = useRef(false)
+  const jumping = useRef(false)
   const flags = useRef({ hover: false, focus: false, drag: false, visible: false, reduced: false })
 
   const perView = perViewFor(viewportW || 1280)
@@ -29,6 +35,14 @@ export default function ProductsCarousel() {
   const step = cardW + GAP
   const maxIndex = Math.max(0, products.length - perView)
   const positions = maxIndex + 1
+
+  // valores atuais acessíveis dentro dos callbacks sem recriá-los
+  const stepRef = useRef(step)
+  const maxRef = useRef(maxIndex)
+  useEffect(() => {
+    stepRef.current = step
+    maxRef.current = maxIndex
+  }, [step, maxIndex])
 
   useEffect(() => {
     const el = viewport.current
@@ -43,24 +57,56 @@ export default function ProductsCarousel() {
     return () => ro.disconnect()
   }, [])
 
-  // posiciona o trilho sempre que o índice ou o tamanho mudam
+  const commit = useCallback((i: number) => {
+    indexRef.current = i
+    setIndex(i)
+  }, [])
+
+  // posiciona o trilho quando o card ativo ou o tamanho da tela mudam
   useEffect(() => {
     const i = Math.min(index, maxIndex)
-    if (i !== index) setIndex(i)
-    const controls = animate(x, -i * step, { type: 'spring', stiffness: 260, damping: 32 })
+    if (i !== index) indexRef.current = i
+    if (jumping.current) {
+      jumping.current = false
+      x.stop()
+      x.set(-i * step)
+      return
+    }
+    const controls = animate(x, -i * step, SPRING)
     return () => controls.stop()
-  }, [index, step, maxIndex, x])
+  }, [index, step, maxIndex, x, commit])
+
+  // volta do último para o primeiro (e saltos longos): esmaece, troca de posição e reaparece.
+  // Nunca "varre" todos os cards no caminho.
+  const jump = useCallback(
+    (target: number) => {
+      animate(fade, 0, { duration: 0.14 }).then(() => {
+        jumping.current = true
+        x.stop()
+        x.set(-target * stepRef.current)
+        commit(target)
+        animate(fade, 1, { duration: 0.22 })
+      })
+    },
+    [fade, x, commit],
+  )
 
   const go = useCallback(
     (delta: number, manual = false) => {
       elapsed.current = manual ? -AFTER_INTERACTION_MS : 0
-      setIndex((i) => {
-        const n = i + delta
-        return n > maxIndex ? 0 : n < 0 ? maxIndex : n
-      })
+      const n = indexRef.current + delta
+      if (n > maxRef.current) jump(0)
+      else if (n < 0) jump(maxRef.current)
+      else commit(n)
     },
-    [maxIndex],
+    [jump, commit],
   )
+
+  const goToDot = (i: number) => {
+    elapsed.current = -AFTER_INTERACTION_MS
+    if (Math.abs(i - indexRef.current) > 2) jump(i)
+    else commit(i)
+  }
 
   // autoplay: só conta quando visível e sem interação (hover, foco, arrasto)
   useEffect(() => {
@@ -131,19 +177,35 @@ export default function ProductsCarousel() {
           </button>
 
           {/* a janela precisa recortar os cards que estão fora da vista (é o próprio carrossel) */}
-          <div ref={viewport} className="overflow-hidden">
+          <motion.div ref={viewport} className="overflow-hidden" style={{ opacity: fade }}>
             <motion.ul
               className="flex cursor-grab active:cursor-grabbing"
               style={{ x, gap: GAP, touchAction: 'pan-y' }}
               drag="x"
-              dragConstraints={{ left: 0, right: 0 }}
+              dragConstraints={{ left: -maxIndex * step, right: 0 }}
               dragElastic={0.12}
-              dragSnapToOrigin
-              onDragStart={() => (flags.current.drag = true)}
+              dragMomentum={false}
+              onDragStart={() => {
+                flags.current.drag = true
+                dragged.current = true
+              }}
               onDragEnd={(_, info) => {
                 flags.current.drag = false
-                if (info.offset.x < -SWIPE) go(1, true)
-                else if (info.offset.x > SWIPE) go(-1, true)
+                window.setTimeout(() => (dragged.current = false), 0)
+                const cur = indexRef.current
+                let target = cur
+                if (info.offset.x < -SWIPE || info.velocity.x < -SWIPE_VELOCITY) target = Math.min(cur + 1, maxIndex)
+                else if (info.offset.x > SWIPE || info.velocity.x > SWIPE_VELOCITY) target = Math.max(cur - 1, 0)
+                elapsed.current = -AFTER_INTERACTION_MS
+                if (target !== cur) commit(target)
+                else animate(x, -cur * step, SPRING) // não passou do limite: volta para o card atual (e não para o começo)
+              }}
+              // depois de arrastar com o mouse, o "soltar" não deve abrir o link do card
+              onClickCapture={(e) => {
+                if (dragged.current) {
+                  e.preventDefault()
+                  e.stopPropagation()
+                }
               }}
             >
               {products.map((p, i) => (
@@ -157,7 +219,7 @@ export default function ProductsCarousel() {
                 </li>
               ))}
             </motion.ul>
-          </div>
+          </motion.div>
         </div>
 
         {/* indicadores + setas (mobile) */}
@@ -173,10 +235,7 @@ export default function ProductsCarousel() {
                 role="tab"
                 aria-selected={i === index}
                 aria-label={`Ir para a posição ${i + 1}`}
-                onClick={() => {
-                  elapsed.current = -AFTER_INTERACTION_MS
-                  setIndex(i)
-                }}
+                onClick={() => goToDot(i)}
                 className="grid h-11 min-w-6 place-items-center px-1"
               >
                 <span className={`block h-1.5 rounded-full transition-all duration-300 ${i === index ? 'w-7 bg-accent' : 'w-2.5 bg-white/40'}`} />

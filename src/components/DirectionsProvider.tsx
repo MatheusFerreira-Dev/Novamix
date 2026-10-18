@@ -157,7 +157,16 @@ function DirectionsDialog({ onClose }: { onClose: () => void }) {
 
 export default function DirectionsProvider({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false)
-  const openDirections = useCallback(() => setOpen(true), [])
+  const openDirections = useCallback(() => {
+    // celular/tablet de toque: abre direto o Google Maps (app ou site) já com a rota, sem tela intermediária
+    const isMobile = window.matchMedia('(max-width: 767px), (pointer: coarse) and (max-width: 1024px)').matches
+    if (isMobile) {
+      const win = window.open(mapsDirectionsUrl, '_blank', 'noopener,noreferrer')
+      if (!win) window.location.href = mapsDirectionsUrl // pop-up bloqueado: navega na mesma aba
+      return
+    }
+    setOpen(true) // desktop: mapa dentro do próprio site
+  }, [])
   const close = useCallback(() => setOpen(false), [])
   const value = useMemo(() => ({ openDirections }), [openDirections])
 

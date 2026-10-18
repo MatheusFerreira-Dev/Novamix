@@ -42,19 +42,6 @@ export default function Footer({ homePrefix = '' }: { homePrefix?: string }) {
           </ul>
         </nav>
 
-        <nav aria-label="Cidades atendidas">
-          <h2 className={headingClass}>Onde atendemos</h2>
-          <ul className="space-y-1 text-sm">
-            {business.serviceAreas.map((c) => (
-              <li key={c.path}>
-                <a href={c.path} className="inline-flex min-h-9 items-center text-white/75 hover:text-accent">
-                  Troca de óleo em {c.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
         <div>
           <h2 className={headingClass}>Contato</h2>
           <ul className="space-y-3 text-sm text-white/75">

@@ -62,7 +62,7 @@ export const landingPages: LandingPageData[] = [
       { heading: 'Serviços e produtos', list: servicos },
       {
         heading: 'Onde estamos',
-        paragraphs: [`Estamos na ${addr}. Fica no Centro de Jarinu, perto de ${business.nearbyCities.join(' e ')}.`],
+        paragraphs: [`Estamos na ${addr}. Fica no Centro de Jarinu.`],
       },
     ],
     faq: [
@@ -77,78 +77,6 @@ export const landingPages: LandingPageData[] = [
       {
         question: 'Qual óleo é o ideal para o meu carro?',
         answer: 'O indicado pelo fabricante no manual do veículo. Informe marca, modelo, ano e motor e nossa equipe ajuda a escolher entre mineral, semissintético e sintético.',
-      },
-      horarioFaq,
-    ],
-  },
-  {
-    path: '/troca-de-oleo-varzea-paulista/',
-    title: 'Troca de Óleo em Várzea Paulista | Novamix Center',
-    description:
-      'Mora em Várzea Paulista? A Novamix Center faz troca de óleo, filtros e acessórios em Jarinu - SP. Veja como chegar e agende pelo WhatsApp.',
-    h1: 'Troca de óleo em Várzea Paulista e região',
-    lead: 'Atendemos clientes de Várzea Paulista na Novamix Center, em Jarinu - SP: troca de óleo, filtros, lubrificantes e acessórios.',
-    breadcrumb: 'Troca de óleo em Várzea Paulista',
-    showProcess: true,
-    waMessage: 'Olá! Sou de Várzea Paulista e gostaria de agendar uma troca de óleo para o meu veículo.',
-    blocks: [
-      {
-        heading: 'Troca de óleo para quem é de Várzea Paulista',
-        paragraphs: [
-          'Se você mora ou trabalha em Várzea Paulista e procura um lugar para fazer a troca de óleo do carro, a Novamix Center atende no Centro de Jarinu - SP.',
-          'Antes de vir, fale com a equipe pelo WhatsApp: você informa marca, modelo e ano do veículo, confirma o horário e já deixa o óleo e o filtro definidos.',
-        ],
-      },
-      { heading: 'O que a loja oferece', list: servicos },
-      {
-        heading: 'Onde fica a loja',
-        paragraphs: [`${addr}. Use o botão "Como chegar" para abrir o mapa e traçar a rota a partir de onde você está.`],
-      },
-    ],
-    faq: [
-      {
-        question: 'Vocês atendem clientes de Várzea Paulista?',
-        answer: `Sim. A loja recebe clientes de Várzea Paulista e região. A unidade fica em Jarinu - SP, na ${addr}.`,
-      },
-      {
-        question: 'Como agendar a troca de óleo vindo de Várzea Paulista?',
-        answer: 'Pelo formulário do site ou pelo WhatsApp. Informe o veículo e o melhor horário, e a equipe confirma com você.',
-      },
-      horarioFaq,
-    ],
-  },
-  {
-    path: '/troca-de-oleo-campo-limpo-paulista/',
-    title: 'Troca de Óleo em Campo Limpo Paulista | Novamix Center',
-    description:
-      'Procura troca de óleo perto de Campo Limpo Paulista? A Novamix Center fica em Jarinu - SP: óleos, filtros e acessórios. Agende pelo WhatsApp.',
-    h1: 'Troca de óleo em Campo Limpo Paulista e região',
-    lead: 'Atendemos clientes de Campo Limpo Paulista na Novamix Center, em Jarinu - SP: troca de óleo, filtros, lubrificantes e acessórios.',
-    breadcrumb: 'Troca de óleo em Campo Limpo Paulista',
-    showProcess: true,
-    waMessage: 'Olá! Sou de Campo Limpo Paulista e gostaria de agendar uma troca de óleo para o meu veículo.',
-    blocks: [
-      {
-        heading: 'Troca de óleo para quem é de Campo Limpo Paulista',
-        paragraphs: [
-          'Se você mora ou trabalha em Campo Limpo Paulista e quer fazer a troca de óleo do seu carro, a Novamix Center atende no Centro de Jarinu - SP.',
-          'Fale com a equipe pelo WhatsApp antes de vir: assim você já informa o veículo, escolhe o óleo adequado e combina o horário.',
-        ],
-      },
-      { heading: 'O que a loja oferece', list: servicos },
-      {
-        heading: 'Onde fica a loja',
-        paragraphs: [`${addr}. Use o botão "Como chegar" para abrir o mapa e traçar a rota a partir de onde você está.`],
-      },
-    ],
-    faq: [
-      {
-        question: 'Vocês atendem clientes de Campo Limpo Paulista?',
-        answer: `Sim. A loja recebe clientes de Campo Limpo Paulista e região. A unidade fica em Jarinu - SP, na ${addr}.`,
-      },
-      {
-        question: 'Preciso levar algo para fazer a troca de óleo?',
-        answer: 'Leve o veículo e, se tiver, o manual do proprietário. Se preferir, informe marca, modelo, ano e motor pelo WhatsApp antes de vir.',
       },
       horarioFaq,
     ],

@@ -36,7 +36,7 @@ export const faq: FaqItem[] = [
   },
   {
     question: 'Onde fazer troca de óleo em Jarinu?',
-    answer: `A ${business.name} fica na ${address}, em Jarinu - SP, próximo a Atibaia, Campo Limpo Paulista e Jundiaí. Use o botão "Como chegar" do site para ver o mapa.`,
+    answer: `A ${business.name} fica na ${address}, no Centro de Jarinu - SP. Use o botão "Como chegar" do site para ver o mapa.`,
   },
   {
     question: 'Quais produtos e serviços a loja oferece?',

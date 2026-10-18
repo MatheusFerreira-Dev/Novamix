@@ -18,9 +18,6 @@ export default function About() {
             lubrificantes, limpeza a seco do motor, higienização do ar-condicionado, produtos de limpeza e acessórios automotivos, para você
             manter seu veículo sempre em boas condições.
           </p>
-          <p className="mt-3 max-w-lg text-base leading-relaxed text-neutral-700">
-            Estamos perto de Atibaia, Campo Limpo Paulista e Jundiaí.
-          </p>
           <address className="mt-6 border-l-4 border-accent pl-4 not-italic">
             <p className="font-display text-lg font-bold uppercase tracking-wider">
               {business.city} • {business.state}
